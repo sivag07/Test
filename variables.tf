@@ -1,5 +1,5 @@
 variable "prefix" {
-  default = "shiva"
+  default = "shiva-RG"
 }
 
 variable "CIDR" {
@@ -11,5 +11,8 @@ variable "location" {
   default     = "westus2"
 }
 
+variable "subnet" {
+  default  = "10.0.2.0/24"
+}
 
 

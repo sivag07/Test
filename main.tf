@@ -7,15 +7,17 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "main" {
-  name     = "${var.prefix}-resources"
+  name     = "${var.prefix}"
   location = "West US 2"
 }
 
 resource "azurerm_virtual_network" "main" {
   name                = "${var.prefix}-network"
   address_space       = "${var.CIDR}"
-  location            = "${azurerm_resource_group.main.location}"
-  resource_group_name = "${azurerm_resource_group.main.name}"
+ #location            = "${azurerm_resource_group.main.location}"
+  location            = "${var.location}" 
+ #resource_group_name = "${azurerm_resource_group.main.name}"
+  resource_group_name = "${var.prefix}" 
   
 }
 
@@ -23,7 +25,7 @@ resource "azurerm_subnet" "internal" {
   name                 = "internal"
   resource_group_name  = "${azurerm_resource_group.main.name}"
   virtual_network_name = "${azurerm_virtual_network.main.name}"
-  address_prefix       = "10.0.2.0/24"
+  address_prefix       = "${var.subnet}"
 }
 
 resource "azurerm_network_interface" "main" {

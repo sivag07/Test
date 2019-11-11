@@ -1,10 +1,3 @@
-provider "azurerm" {
-  subscription_id = "0bc42982-3f3a-417a-8085-e377053233e5"
-  client_id       = "4cf0dc19-c5ea-44b2-b81d-8ff0f420f432"
-  client_secret   = "5775b1a9-5c60-47bd-b702-a7beb5e1793b"
-  tenant_id       = "3e86ea77-0f3e-4e72-8d20-b671b5775714"
-  version 	  = "1.36.0"
-}
 
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}"

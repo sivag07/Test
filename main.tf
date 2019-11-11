@@ -5,7 +5,8 @@ resource "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_virtual_network" "main" {
-  name                = "${var.prefix}-network"
+ #name                = "${var.prefix}-network"
+  name                = "${var.network}"
   address_space       = "${var.CIDR}"
  #location            = "${azurerm_resource_group.main.location}"
   location            = "${var.location}" 
@@ -66,7 +67,8 @@ resource "azurerm_virtual_machine" "main" {
     version   = "latest"
   }
   storage_os_disk {
-    name              = "myosdisk1"
+  # name              = "myosdisk1"
+    name              = "${var.prefix}-os-disk"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
@@ -80,6 +82,6 @@ resource "azurerm_virtual_machine" "main" {
     disable_password_authentication = false
   }
   tags = {
-    environment = "staging"
+    environment = "dev"
   }
 }

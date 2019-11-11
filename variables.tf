@@ -2,6 +2,11 @@ variable "prefix" {
   default = "shiva-RG"
 }
 
+variable "network" {
+  description = "virtual network"
+  default     = "shiva-RG"
+}
+
 variable "CIDR" {
   default  = ["10.0.0.0/16"]
 }
@@ -13,6 +18,11 @@ variable "location" {
 
 variable "subnet" {
   default  = "10.0.2.0/24"
+}
+
+variable "os-disk" {
+  description = "Storage_os_disk"
+  default     = "shiva-RG"
 }
 
 

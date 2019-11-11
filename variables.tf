@@ -20,9 +20,30 @@ variable "subnet" {
   default  = "10.0.2.0/24"
 }
 
+/*
+variable "nsg" {
+  description = "network_security_group"
+  default     = "shiva-RG"
+}
+*/
+
 variable "os-disk" {
   description = "Storage_os_disk"
   default     = "shiva-RG"
 }
 
+variable "storage-acc" {
+  description = "azurerm_sa_name"
+  default     = "shiva-RG"
+}
+
+variable "storage-cont" {
+  description = "azurerm_storage_cont_name"
+  default     = "shiva-RG"
+}
+
+variable "website_repo" {
+  description = "azurerm_website_reponame"
+  default     = "shiva-RG"
+}
 

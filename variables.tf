@@ -17,7 +17,7 @@ variable "location" {
 }
 
 variable "subnet" {
-  default  = "10.0.2.0/24"
+ # default  = "10.0.2.0/24"
 }
 
 /*
@@ -31,8 +31,8 @@ variable "os-disk" {
   description = "Storage_os_disk"
   default     = "shiva-RG"
 }
-
-variable "storage-acc" {
+/*
+variable "storageacc125" {
   description = "azurerm_sa_name"
   default     = "shiva-RG"
 }
@@ -41,5 +41,5 @@ variable "storage-cont" {
   description = "azurerm_storage_container_name"
   default     = "shiva-RG"
 }
-
+*/
 

@@ -1,17 +1,13 @@
 
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}"
- #location = "West US 2"
   location = "${var.location}"
 }
 
 resource "azurerm_virtual_network" "main" {
- #name                = "${var.prefix}-network"
   name                = "${var.network}"
   address_space       = "${var.CIDR}"
- #location            = "${azurerm_resource_group.main.location}"
   location            = "${var.location}" 
- #resource_group_name = "${azurerm_resource_group.main.name}"
   resource_group_name = "${var.prefix}" 
   
 }
@@ -19,7 +15,6 @@ resource "azurerm_virtual_network" "main" {
 
 resource "azurerm_network_security_group" "main" {
   name                = "acceptanceTestSecurityGroup1"
- #name                = "{var.prefix}-nsg"
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
 
@@ -61,7 +56,6 @@ resource "azurerm_network_interface" "main" {
 /*
 resource "azurerm_network_security_group" "main" {
   name                = "acceptanceTestSecurityGroup1"
- #name                = "{var.prefix}-nsg"
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
 
@@ -94,7 +88,6 @@ resource "azurerm_virtual_machine" "main" {
     version   = "latest"
   }
   storage_os_disk {
-  # name              = "myosdisk1"
     name              = "${var.prefix}-os-disk"
     caching           = "ReadWrite"
     create_option     = "FromImage"
@@ -113,29 +106,27 @@ resource "azurerm_virtual_machine" "main" {
   }
 }
 
-resource "azurerm_storage_account" "storageaccount" {
-   name = "${var.storage-acc}"
-   resource_group_name = "${azurerm_resource_group.main.name}"
-   location = "${var.location}"
-   account_tier = "Standard"
-   account_replication_type = "GRS"
-}
-resource "azurerm_storage_container" "blobstorage" {
-   name = "${var.storage-cont}"
-   resource_group_name = "${azurerm_resource_group.main.name}"
-   storage_account_name = "${azurerm_storage_account.storageaccount.name}"
-   container_access_type = "blob"
-}
-resource "azurerm_storage_blob" "blobobject" {
-   depends_on=  ["azurerm_storage_container.blobstorage"]
-   name = "index.html"
-   resource_group_name = "${azurerm_resource_group.main.name}"
-   storage_account_name = "${azurerm_storage_account.storageaccount.name}"
-   storage_container_name = "${azurerm_storage_container.blobstorage.name}"
-   source="./index.html"
-
+resource "azurerm_storage_account" "main" {
+  name                     = "storageacc125"
+  resource_group_name      = "${azurerm_resource_group.main.name}"
+  location                 = "${azurerm_resource_group.main.location}"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
 }
 
-output "url" {
-   value = "http://${azurerm_storage_account.storageaccount.name}.blob.core.windows.net/${azurerm_storage_container.blobstorage.name}/index.html"
+resource "azurerm_storage_container" "main" {
+  name                  = "content"
+  resource_group_name   = "${azurerm_resource_group.main.name}"
+  storage_account_name  = "${azurerm_storage_account.main.name}"
+  container_access_type = "private"
 }
+
+resource "azurerm_storage_blob" "main" {
+  name                   = "my-awesome-content.zip"
+  resource_group_name    = "${azurerm_resource_group.main.name}"
+  storage_account_name   = "${azurerm_storage_account.main.name}"
+  storage_container_name = "${azurerm_storage_container.main.name}"
+  type                   = "Block"
+ #source                 = "some-local-file.zip"
+}
+

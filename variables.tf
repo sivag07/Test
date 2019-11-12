@@ -38,12 +38,8 @@ variable "storage-acc" {
 }
 
 variable "storage-cont" {
-  description = "azurerm_storage_cont_name"
+  description = "azurerm_storage_container_name"
   default     = "shiva-RG"
 }
 
-variable "website_repo" {
-  description = "azurerm_website_reponame"
-  default     = "shiva-RG"
-}
 

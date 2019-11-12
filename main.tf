@@ -113,8 +113,6 @@ resource "azurerm_virtual_machine" "main" {
   }
 }
 
-/*
-
 resource "azurerm_storage_account" "storageaccount" {
    name = "${var.storage-acc}"
    resource_group_name = "${azurerm_resource_group.main.name}"
@@ -141,6 +139,3 @@ resource "azurerm_storage_blob" "blobobject" {
 output "url" {
    value = "http://${azurerm_storage_account.storageaccount.name}.blob.core.windows.net/${azurerm_storage_container.blobstorage.name}/index.html"
 }
-
-*/
-

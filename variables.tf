@@ -20,26 +20,35 @@ variable "subnet" {
  # default  = "10.0.2.0/24"
 }
 
-/*
-variable "nsg" {
+
+variable "security-group" {
   description = "network_security_group"
-  default     = "shiva-RG"
+  default     = "SecurityGroup1"
 }
-*/
 
 variable "os-disk" {
   description = "Storage_os_disk"
   default     = "shiva-RG"
 }
-/*
-variable "storageacc125" {
-  description = "azurerm_sa_name"
-  default     = "shiva-RG"
+
+
+variable "storagecont" {
+  description = "azurerm_storage_container_name"
+  default     = "content"
 }
 
-variable "storage-cont" {
-  description = "azurerm_storage_container_name"
-  default     = "shiva-RG"
+variable "mystorageacc" {
+ description = "azurerm_storage_account_details"
+ default = "mystorage191"
 }
-*/
+
+variable "blobstore" {
+  description = "azurerm_storage_blob"
+  default     = "test.zip"
+}
+
+variable "source" {
+  description = "upload_storage_blob"
+  default     = "test.zip"
+}
 

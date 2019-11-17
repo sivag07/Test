@@ -15,6 +15,7 @@ resource "azurerm_virtual_network" "main" {
 
 resource "azurerm_network_security_group" "main" {
   name                = "acceptanceTestSecurityGroup1"
+ #name                = "${var.security-group}"
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
 
@@ -107,7 +108,8 @@ resource "azurerm_virtual_machine" "main" {
 }
 
 resource "azurerm_storage_account" "main" {
-  name                     = "storageacc125"
+  #name                     = "mystore"
+  name                     = "${var.mystorageacc}"
   resource_group_name      = "${azurerm_resource_group.main.name}"
   location                 = "${azurerm_resource_group.main.location}"
   account_tier             = "Standard"
@@ -115,18 +117,20 @@ resource "azurerm_storage_account" "main" {
 }
 
 resource "azurerm_storage_container" "main" {
-  name                  = "content"
+ #name                  = "content"
+  name                  = "${var.storagecont}"
   resource_group_name   = "${azurerm_resource_group.main.name}"
   storage_account_name  = "${azurerm_storage_account.main.name}"
   container_access_type = "private"
 }
 
 resource "azurerm_storage_blob" "main" {
-  name                   = "my-awesome-content.zip"
+ #name                   = "test.zip"
+  name                   = "${var.blobstore}"
   resource_group_name    = "${azurerm_resource_group.main.name}"
   storage_account_name   = "${azurerm_storage_account.main.name}"
   storage_container_name = "${azurerm_storage_container.main.name}"
   type                   = "Block"
- #source                 = "some-local-file.zip"
+ #source                 = "test.zip"
+  source                 = "${var.source}"
 }
-
